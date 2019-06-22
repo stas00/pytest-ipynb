@@ -80,14 +80,14 @@ class IPyNbCell(pytest.Item):
 
     def __init__(self, name, parent, cell_num, cell):
         cell_description = get_cell_description(cell.input)
-        nodeid = parent.nodeid + "::" + f"cell {cell_num:2d}"
         if cell_description:
-            # If the cell has a valid cell description, it to the node id.
-            nodeid += " " + cell_description[0:40]
+            # If the cell has a valid cell description, use it as the node id.
+            desc = cell_description[0:40]
         else:
-            # Otherwise append the raw code to the node id;
-            # replace newlines "\n" with "\\n " to avoid line breaks.
-            nodeid += "  " + cell.input.replace("\n", "\\n ")[0:40]
+            # fallback to a code snippet as an identifier
+            desc = cell.input.replace("\n", "\\n ")[0:40].strip()
+
+        nodeid = parent.nodeid + "::" + f"cell {cell_num:2d}" + f" {desc}"
         super(IPyNbCell, self).__init__(name, parent, nodeid=nodeid)
 
         self.cell_num = cell_num
