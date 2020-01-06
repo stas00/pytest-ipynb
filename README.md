@@ -2,6 +2,8 @@
 
 Plugin for `pytest` to run ipython/jupyter notebooks as unit and integration tests.
 
+**This is a fork that has been fixed to work, since the original is no longer being maintained**
+
 It allows you to put both `.py` and `.ipynb` test files inside your normal test suite.
 
 It currently relies on `runipy` to interface with the Notebook.
