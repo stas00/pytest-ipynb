@@ -20,7 +20,7 @@ class IPyNbException(Exception):
     """ custom exception for error reporting. """
 
 def pytest_collect_file(path, parent):
-    if path.fnmatch("test*.ipynb"): return IPyNbFile(path, parent)
+    if path.fnmatch("test*.ipynb"): return IPyNbFile.from_parent(parent, fspath=path)
 
 def get_cell_description(cell_input):
     """Gets cell description
@@ -56,7 +56,7 @@ class IPyNbFile(pytest.File):
         cell_num = 1
 
         for cell in self.runner.iter_code_cells():
-            yield IPyNbCell(self.name, self, cell_num, cell)
+            yield IPyNbCell.from_parent(self, name=self.name, cell_num=cell_num, cell=cell)
             cell_num += 1
 
     def setup(self):

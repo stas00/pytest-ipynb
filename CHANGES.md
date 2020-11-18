@@ -1,5 +1,6 @@
 # Changes
 
+
 ## 1.1.1.dev0
 
 - must not restart kernel for each cell (needs to be made configurable for those who want it to be restarted).
@@ -7,6 +8,8 @@
 - use run_cell from runipy/notebook_runner.py as a base for a better runtest implementation than the original run_cell from pytest-ipynb, to include reporting output streams (pyout, stdout and stderr) which is crucial for enabling the debug of failing tests.
 - clear out some of the old pre-python-3, pre-notebook 4 stuff
 - fallback to using the snippet of code if there is no cell description (thanks to @svaberg)
+- adjust for API changes in pytest-6.0 ("Node Construction changed to Node.from_parent" https://docs.pytest.org/en/stable/deprecations.html#node-construction-changed-to-node-from-parent)
+- add a basic test suite
 
 ## 1.1.0
 
